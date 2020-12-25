@@ -2,6 +2,7 @@
 import copy
 import functools
 import itertools
+from anytree import AnyNode, Node, RenderTree
 
 count = 0
 
@@ -59,15 +60,57 @@ def day10test():
         #print(max_joltage)
         joltage(data, 0)
 
+
 def day10part2():
-    with open('test2.txt') as f:
+    with open('test.txt') as f:
         data = f.readlines()
         data = [int(x.strip()) for x in data]
+        data.append(0)
+        data.append(max(data) + 3)
         data.sort()
-        print(count)
-        joltage2(data)
-        print(count)
+        root = Node(0)
+        print(data)
+        for adapter in data:
+            print(RenderTree(root))
+            for child in [x for x in data if x <= adapter + 3 if x > adapter]:
+                print(adapter, child)
+            #tree[adapter] = [x for x in data if x <= adapter + 3 if x > adapter]
+        print(root)
+        print(RenderTree(root))
+
+tree = {}
+
+@functools.lru_cache
+def recurseplz(index):
+    if not tree[index]:
+        return 1
+    else:
+        return(sum([recurseplz(x) for x in tree[index]]))
+
+
+def ohgod():
+    with open('day10.txt') as f:
+        data = f.readlines()
+        data = [int(x.strip()) for x in data]
+        data.append(0)
+        data.append(max(data) + 3)
+        data.sort()
+        #print(data)
+        global tree
+        for adapter in data:
+            tree[adapter] = [x for x in data if x <= adapter + 3 if x > adapter]
+        '''
+        data.sort(reverse=True)
+        newdict = {}
+        newdict[data[0]] = 1
+        for x in data[1:]:
+            newdict[x] = sum(newdict[y] for y in tree[x])
+        print(newdict)
+        '''
+        print(recurseplz(0))
+        #print(tree)
 
 if __name__=="__main__":
     #day10test()
-    day10part2()
+    #day10part2()
+    ohgod()

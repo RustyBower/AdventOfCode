@@ -38,7 +38,7 @@ After the first step of this process, the polymer becomes NCNBCHB.
 
 Here are the results of a few steps using the above rules:
 
-Template:     NNCB
+Template: NNCB
 After step 1: NCNBCHB
 After step 2: NBCCNBBBCBHCB
 After step 3: NBBBCNCCNBBNBNBBCHBHHBCHB

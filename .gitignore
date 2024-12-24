@@ -1,0 +1,5 @@
+# Ignore input.txt in any subfolder
+**/input.txt
+
+# Ignore dayXX.txt in any subfolder where XX is any two digits
+**/day[0-9][0-9].txt
